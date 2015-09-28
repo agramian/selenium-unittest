@@ -7,14 +7,13 @@ import time
 import timeit
 from selenium import webdriver
 
-try:
-    from common.helpers import store_class_fields
-    from common.subprocess_manager.run_subprocess import run_subprocess
-except:
-    sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                 "../../../buildbot/utils/build_helpers"))
-    from common.helpers import store_class_fields
-    from common.subprocess_manager.run_subprocess import run_subprocess
+from subprocess_manager.run_subprocess import run_subprocess
+
+def store_class_fields(class_ref, args_passed):
+    """ Store the passed in class fields in self
+    """
+    params = get_function_args(class_ref.__init__)
+    for p in params: setattr(class_ref, p, args_passed[p])
 
 class StartWebDriverError(Exception): pass
 

@@ -47,9 +47,7 @@ json.dump(kwargs, open(selenium_config_file_path,'w'))
 # discover and run tests
 import unittest
 import sys
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             "../../"))
-from utils.python_unittest.custom_text_test_runner import CustomTextTestRunner
+from custom_text_test_runner import CustomTextTestRunner
 
 def run_tests(start_dir, pattern, top_level_dir):
     test_modules = unittest.defaultTestLoader.discover(start_dir=start_dir, pattern=pattern, top_level_dir=top_level_dir)
