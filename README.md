@@ -4,7 +4,7 @@ Contents
 --------
 ### [Overview](#overview-1)
 ### [Installation](#installation-1)
-### [Running tests locally](#running-tests-1)
+### [Running tests](#running-tests-1)
 ##### [Usage](usage-1)
 ### [Using the Chrome Developer Console](#using-the-chrome-developer-console-1)
 ##### [Description](#description-1)
