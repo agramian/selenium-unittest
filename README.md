@@ -51,6 +51,19 @@ optional arguments:
                         Browser to run tests on.
   --browser_version BROWSER_VERSION
                         Selenium test browser version.
+  --test_dir TEST_DIR   Path to directory containing tests. (path type is
+                        based on value of --test_dir_path_type which defaults
+                        to relative)
+  --test_dir_path_type {absolute,relative}
+                        Type of path to use when determining test_dir
+                        location.
+  --results_dir RESULTS_DIR
+                        Path to directory to read/write results from/to.(path
+                        type is based on value of --results_dir_path_type
+                        which defaults to relative)
+  --results_dir_path_type {absolute,relative}
+                        Type of path to use when determining results_dir
+                        location.
   --test_suites TEST_SUITES
                         Comma-separated test directories.
   --test_types TEST_TYPES
