@@ -18,13 +18,14 @@ class BaseSeleniumTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        selenium_config_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "selenium.cfg")
+        selenium_config_file_path = os.path.join(os.getcwd(), "selenium.cfg")
         selenium_cfg = json.load(open(selenium_config_file_path))
         BaseSeleniumTest.browser_name = selenium_cfg['browser_name']
+        cls.selenium_screenshot_dir = os.path.abspath(os.path.join(selenium_cfg['screenshot_dir'], cls.__name__))
+        selenium_cfg.pop('screenshot_dir', None)
         cls.selenium_test_manager = SeleniumTestManager(**{k:v for (k,v) in selenium_cfg.iteritems() if v})
         cls.selenium_test_manager.setup()
         cls.selenium_server_is_setup = True
-        cls.selenium_screenshot_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../results/screenshots", cls.__name__))
 
     @classmethod
     def tearDownClass(cls):
@@ -50,9 +51,9 @@ class BaseSeleniumTest(unittest.TestCase):
     def tearDown(self):
         """
         # TODO need logic to detect that it's the last test case of the suite
-        if not BaseSeleniumTest.suite_is_teared_down and hasattr(self, 'teardown_suite'):
+        if not BaseAppiumTest.suite_is_teared_down and hasattr(self, 'teardown_suite'):
             self.teardown_suite()
-            BaseSeleniumTest.suite_is_teared_down = True
+            BaseAppiumTest.suite_is_teared_down = True
         """
         if hasattr(self, 'teardown_case'):
             try:
