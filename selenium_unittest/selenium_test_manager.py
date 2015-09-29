@@ -1,13 +1,18 @@
 #!/usr/bin/python
 
 import sys, os, traceback
+import inspect
 from shell import shell, Shell
 import threading
 import time
 import timeit
 from selenium import webdriver
 
-from subprocess_manager.run_subprocess import run_subprocess
+def get_function_args(func_ref):
+    try:
+        return [p for p in inspect.getargspec(func_ref).args if p != 'self']
+    except:
+        return None
 
 def store_class_fields(class_ref, args_passed):
     """ Store the passed in class fields in self
@@ -25,14 +30,14 @@ class SeleniumTestManager():
     """ A Class for managing and abstracting
     server and driver setup and usage for Selenium tests
     """
-    webdriver_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'webdrivers')
 
     def __init__(self,
                  browser_name,
                  browser_version,
+                 webdriver_path,
                  base_url,
                  start_webdriver_num_tries=3):
-        store_class_fields(self, locals(), False)
+        store_class_fields(self, locals())
         self.stdout_file = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                         'selenium_server_stdout.log')
 
@@ -61,9 +66,8 @@ class SeleniumTestManager():
         for i in range(self.start_webdriver_num_tries):
             try:
                 print "Starting the Selenium WebDriver...\n"
-
                 if self.browser_name.lower() == 'chrome':
-                    self.driver = webdriver.Chrome(os.path.join(self.webdriver_dir, 'chromedriver'))
+                    self.driver = webdriver.Chrome(self.webdriver_path)
                 break
             except Exception as e:
                 if i == self.start_webdriver_num_tries - 1:
