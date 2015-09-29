@@ -13,7 +13,7 @@ except ImportError:
     read_md = lambda f: open(f, 'r').read()
 
 setup(name='selenium_unittest',
-      version='0.1.2',
+      version='0.1.3',
       description='Selenium Unit Test Framework',
       long_description=read_md('README.md'),
       author='Abtin Gramian',
@@ -25,7 +25,7 @@ setup(name='selenium_unittest',
         'selenium',
         'Appium-Python-Client==0.11'
       ],
-      download_url = 'https://github.com/agramian/selenium-unittest/tarball/v0.1.2',
+      download_url = 'https://github.com/agramian/selenium-unittest/tarball/v0.1.3',
       keywords = ['selenium', 'unittest', 'unit', 'test', 'testing'],
       classifiers = [],
      )
