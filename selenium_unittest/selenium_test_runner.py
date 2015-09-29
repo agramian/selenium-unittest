@@ -13,6 +13,26 @@ parser.add_argument('--browser_version',
                     dest='browser_version',
                     help='Selenium test browser version.',
                     default='latest')
+parser.add_argument('--test_dir',
+                    dest='test_dir',
+                    help='Path to directory containing tests. '
+                         '(path type is based on value of --test_dir_path_type which defaults to relative)',
+                    default='~')
+parser.add_argument('--test_dir_path_type',
+                    dest='test_dir_path_type',
+                    help='Type of path to use when determining test_dir location.',
+                    choices=['absolute', 'relative'],
+                    default='relative')
+parser.add_argument('--results_dir',
+                    dest='results_dir',
+                    help='Path to directory to read/write results from/to.'
+                         '(path type is based on value of --results_dir_path_type which defaults to relative)',
+                    default='~')
+parser.add_argument('--results_dir_path_type',
+                    dest='results_dir_path_type',
+                    help='Type of path to use when determining results_dir location.',
+                    choices=['absolute', 'relative'],
+                    default='relative')
 parser.add_argument('--test_suites',
                     dest='test_suites',
                     help='Comma-separated test directories.')
@@ -40,8 +60,8 @@ kwargs = {
     'base_url': args.base_url
 }
 import os
-current_script_path = os.path.dirname(os.path.abspath(__file__))
-selenium_config_file_path = os.path.join(current_script_path, "selenium.cfg")
+current_working_directory = os.getcwd()
+selenium_config_file_path = os.path.join(current_working_directory, "selenium.cfg")
 json.dump(kwargs, open(selenium_config_file_path,'w'))
 
 # discover and run tests
@@ -56,8 +76,10 @@ def run_tests(start_dir, pattern, top_level_dir):
             for test in suite._tests:
                 test.__dict__.update(kwargs.items())
     return test_modules
-start_dir = os.path.normpath('%s/../tests' %(current_script_path))
-results_dir = os.path.abspath(os.path.normpath('%s/../results/' %current_script_path))
+start_dir = os.path.expanduser(args.test_dir) if args.test_dir_path_type =='absolute' else os.path.normpath('%s/%s' %(current_working_directory, args.test_dir))
+if not os.path.isdir(start_dir):
+    raise Exception('start_dir "%s" does not exist!' %start_dir)
+results_dir = os.path.expanduser(args.results_dir) if args.results_dir_path_type =='absolute' else os.path.normpath('%s/%s' %(current_working_directory, args.results_dir))
 results_file_path = os.path.join(results_dir, args.browser_version, '%s.json' %(args.browser_name))
 result_screenshots_dir = os.path.join(results_dir, 'screenshots')
 # delete previous results if show_previous_results not specified
