@@ -95,7 +95,7 @@ selenium_unittest
 |   ├── chromedriver // webdriver for Chrome
 ├── selenium_test_base.py // base selenium test class
 ├── selenium_test_manager.py // handles common server/driver setup/teardown
-├── selenium_test_runner.py // receives command line arguments, then discovers and runs appium tests
+├── selenium_test_runner.py // receives command line arguments, then discovers and runs selenium tests
 ```
 
 ###### [Back to top](#contents)

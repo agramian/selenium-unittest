@@ -50,9 +50,9 @@ class BaseSeleniumTest(unittest.TestCase):
     def tearDown(self):
         """
         # TODO need logic to detect that it's the last test case of the suite
-        if not BaseAppiumTest.suite_is_teared_down and hasattr(self, 'teardown_suite'):
+        if not BaseSeleniumTest.suite_is_teared_down and hasattr(self, 'teardown_suite'):
             self.teardown_suite()
-            BaseAppiumTest.suite_is_teared_down = True
+            BaseSeleniumTest.suite_is_teared_down = True
         """
         if hasattr(self, 'teardown_case'):
             try:

@@ -37,11 +37,9 @@ class SeleniumTestManager():
                                         'selenium_server_stdout.log')
 
     def setup(self):
-        """Start an Appium server then
-        create/connect a web driver and return it
+        """Start a web driver and return it
         """
         try:
-            #self._start_server()
             self._start_driver()
         except:
             print(traceback.format_exc())
@@ -49,23 +47,16 @@ class SeleniumTestManager():
             raise
 
     def teardown(self):
-        """Quit the web driver and stop the Appium server
+        """Stop the web driver
         """
         try:
             self._stop_driver()
         except:
             print(traceback.format_exc())
             pass
-        """
-        try:
-            self._stop_server()
-        except:
-            print(traceback.format_exc())
-            pass
-        """
 
     def _start_driver(self):
-        """Start the appium driver
+        """Start the selenium web driver
         """
         for i in range(self.start_webdriver_num_tries):
             try:
@@ -89,7 +80,3 @@ class SeleniumTestManager():
         print "Stopping the Selenium WebDriver...\n"
         self.driver.close()
         print "Selenium WebDriver stopped.\n"
-
-    def start_new_driver(self, app, appPackage, appActivity):
-        self._stop_driver()
-        pass
