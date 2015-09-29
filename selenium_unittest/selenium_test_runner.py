@@ -94,6 +94,10 @@ def run_tests(start_dir, pattern, top_level_dir):
     test_modules = unittest.defaultTestLoader.discover(start_dir=start_dir, pattern=pattern, top_level_dir=top_level_dir)
     for suites in test_modules._tests:
         for suite in suites._tests:
+            # if the test discoverer failed to load a test,
+            # import the test so that the error details are raised
+            if 'ModuleImportFailure' in suite.__class__.__name__:
+                exec("import %s" %suite.__dict__['_testMethodName'])
             for test in suite._tests:
                 test.__dict__.update(kwargs.items())
     return test_modules
