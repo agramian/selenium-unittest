@@ -3,7 +3,9 @@ Selenium Unittest
 Contents
 --------
 ### [Overview](#overview-1)
-### [Installation](#installation-1)
+### [Setup](#setup-1)
+##### [Installation](#installation-1)
+##### [WebDrivers](#webdrivers-1)
 ### [Running tests](#running-tests-1)
 ##### [Usage](usage-1)
 ### [Using the Chrome Developer Console](#using-the-chrome-developer-console-1)
@@ -23,19 +25,27 @@ The Selenium tests are written in *Python* and run through the language's built-
 
 ###### [Back to top](#contents)
 
-Installation
-------------
+Setup
+-----
+
+###### Installation
 ```
 pip install selenium_unittest
 ```
+
+###### WebDrivers
+Download one or more WebDriver executables from [here](http://www.seleniumhq.org/download/) to a desired location.
+
+*Note: Make sure the executables allow read and execution permission*
 
 ###### [Back to top](#contents)
 
 Running tests
 -------------
 
-##### run_tests.py script
-`python -m selenium_unittest.selenium_test_runner.py --browser_name "Chrome"`
+For basic usage, execute the following command in a directory.  By default test discovery will occur relative to the working directory and will look for any filenames containing the string "test".  The command below also assumes that the chromedriver executable is located in a directory named webdrivers inside the working directory.
+
+`python -m selenium_unittest.selenium_test_runner.py --browser_name "Chrome" --webdriver_path "webdrivers/chromedriver"`
 
 ###### Usage
 ```
@@ -49,6 +59,10 @@ optional arguments:
   -h, --help            show this help message and exit
   --browser_name {Chrome}
                         Browser to run tests on.
+  --webdriver_path WEBDRIVER_PATH
+                        Path to webdriver executable.
+  --webdriver_path_type {absolute,relative}
+                        Type of path to use when determining webdriver_path.
   --browser_version BROWSER_VERSION
                         Selenium test browser version.
   --test_dir TEST_DIR   Path to directory containing tests. (path type is
