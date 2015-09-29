@@ -115,9 +115,11 @@ if args.test_suites:
         suite_start_dir = os.path.normpath('%s/%s' %(start_dir, suite))
         try:
             tests = run_tests(suite_start_dir, args.pattern, start_dir)
+            if not len(tests._tests):
+                raise Exception("No tests found for suite: %s" %suite)
         except:
             return_code = 1
-            raise Exception("No tests found for suite: %s" %suite)
+            raise
         rc = CustomTextTestRunner(verbosity=5,
                                   results_file_path=results_file_path,
                                   result_screenshots_dir=result_screenshots_dir,
@@ -128,9 +130,11 @@ if args.test_suites:
 else:
     try:
         tests = run_tests(start_dir, args.pattern, start_dir)
+        if not len(tests._tests):
+            raise Exception("No tests found")
     except:
         return_code = 1
-        raise Exception("No tests found")
+        raise
     return_code = CustomTextTestRunner(verbosity=5,
                                        results_file_path=results_file_path,
                                        result_screenshots_dir=result_screenshots_dir,
