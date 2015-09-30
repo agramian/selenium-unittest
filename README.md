@@ -8,6 +8,7 @@ Contents
 ##### [WebDrivers](#webdrivers-1)
 ### [Running tests](#running-tests-1)
 ##### [Usage](usage-1)
+##### [Example](example-1)
 ### [Using the Chrome Developer Console](#using-the-chrome-developer-console-1)
 ##### [Description](#description-1)
 ##### [Useful commands](#useful-commands-1)
@@ -91,6 +92,12 @@ optional arguments:
   --base_url BASE_URL   Base url to use for tests.
 ```
 
+###### Example
+An example test is provided in the test directory.
+
+To run it clone the repo and execute the following command from the main directory:<br />
+`python -m selenium_unittest.selenium_test_runner.py --browser_name "Chrome" --test_dir "test" --webdriver_path "test/webdrivers/chromedriver"`
+
 ###### [Back to top](#contents)
 
 Using the Chrome Developer Console
@@ -118,8 +125,6 @@ Code organization
 -----------------
 ```js
 selenium_unittest
-├── webdrivers // selenium webdrivers for various browsers
-|   ├── chromedriver // webdriver for Chrome
 ├── selenium_test_base.py // base selenium test class
 ├── selenium_test_manager.py // handles common server/driver setup/teardown
 ├── selenium_test_runner.py // receives command line arguments, then discovers and runs selenium tests
