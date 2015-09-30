@@ -15,6 +15,7 @@ Contents
 ##### [Element query examples](#element-query-examples-1)
 ##### [More info](#more-info-1)
 ### [Code organization](#code-organization-1)
+### [TODO](#todo-1)
 
 Overview
 --------
@@ -129,5 +130,14 @@ selenium_unittest
 ├── selenium_test_manager.py // handles common server/driver setup/teardown
 ├── selenium_test_runner.py // receives command line arguments, then discovers and runs selenium tests
 ```
+
+###### [Back to top](#contents)
+
+TODO
+----
+- add support for WebDrivers beside ChromeDriver
+- implement teardown_suite()
+- currently if show_previous_results is specified to the test runner, if the same suite or case is run there is no differentiation in the output or screenshot directory (add timestamp)
+- add sample json format of result file in README
 
 ###### [Back to top](#contents)
