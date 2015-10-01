@@ -58,7 +58,7 @@ parser.add_argument('--show_previous_results',
 parser.add_argument('--base_url',
                     dest='base_url',
                     help='Base url to use for tests.',
-                    default='https://beta.guidebook.com')
+                    default='localhost:8080')
 args = parser.parse_args()
 
 # determine start and results directory paths
