@@ -2,7 +2,6 @@
 
 import sys, os, traceback
 import inspect
-from shell import shell, Shell
 import threading
 import time
 import timeit
@@ -21,10 +20,6 @@ def store_class_fields(class_ref, args_passed):
     for p in params: setattr(class_ref, p, args_passed[p])
 
 class StartWebDriverError(Exception): pass
-
-# method for constructing shell comand
-def construct_shell_command(command_string):
-    return ['/bin/bash', '-l', '-c', command_string]
 
 class SeleniumTestManager():
     """ A Class for managing and abstracting
